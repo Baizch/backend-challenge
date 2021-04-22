@@ -14,6 +14,16 @@ router.get("/", async (req, res) => {
 });
 
 //GET /posts/:id
+router.get("/:postId", async (req, res) => {
+  try {
+    const post = await Post.findAll({
+      where: { id: req.params.postId },
+    });
+    res.json(post);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //POST /posts/
 router.post("/", async (req, res) => {
