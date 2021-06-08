@@ -20,8 +20,12 @@ router.get("/:postId", async (req, res) => {
       where: { id: req.params.postId },
     });
     res.json(post);
+
+    if (!post) {
+      res.json("Post not found!");
+    }
   } catch (err) {
-    console.log(err);
+    res.json(err);
   }
 });
 
