@@ -1,21 +1,26 @@
 //import sequelize
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 
 //import model
-const PostModel = require("./models/posts");
+const PostModel = require('./models/posts');
 
 //create instance
-const sequelize = new Sequelize("uhwW6fsNq9", "uhwW6fsNq9", "XH9nDFx4o3", {
-  host: "remotemysql.com",
-  dialect: "mysql",
-});
+const sequelize = new Sequelize(
+  process.env.DB_USER,
+  process.env.DB_NAME,
+  process.env.DB_PASSWORD,
+  {
+    host: 'remotemysql.com',
+    dialect: 'mysql',
+  }
+);
 
 //create table
 const Post = PostModel(sequelize, Sequelize);
 
 //sincronize tables
 sequelize.sync({ force: false }).then(() => {
-  console.log("Tables sincronized!");
+  console.log('Tables sincronized!');
 });
 
 module.exports = {
